@@ -66,9 +66,9 @@ class TestElementEquality:
         assert _make_element(guid=GUID_A) != _make_element(guid=GUID_B)
 
     def test_different_rotation(self):
-        assert _make_element(rotation=Rotation(qx=0, qy=0, qz=0, qw=1.0)) != _make_element(
-            rotation=Rotation(qx=1.0, qy=0, qz=0, qw=0)
-        )
+        assert _make_element(
+            rotation=Rotation(qx=0, qy=0, qz=0, qw=1.0)
+        ) != _make_element(rotation=Rotation(qx=1.0, qy=0, qz=0, qw=0))
 
     def test_different_vector(self):
         assert _make_element(vector=Vector(x=0, y=0, z=0)) != _make_element(

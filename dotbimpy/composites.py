@@ -18,14 +18,20 @@ class Element(BaseModel):
         default_factory=Vector,
         description="Translation vector applied after rotation",
     )
-    type: str = Field("", description="Element type (e.g. 'Beam', 'Column')") # TODO: KLS: "type" is keyword, maybe use "kind" instead?
-    info: Dict[str, str] = Field(default_factory=dict, description="Element level metadata")
+    # TODO: KLS: "type" is keyword, maybe use "kind" instead?
+    type: str = Field("", description="Element type (e.g. 'Beam', 'Column')")
+    info: Dict[str, str] = Field(
+        default_factory=dict, description="Element level metadata"
+    )
     face_colors: Optional[List[int]] = Field(
         None,
         description="Per-face RGBA colors as flat list [r1,g1,b1,a1, r2,g2,b2,a2, ...]",
     )
 
-    def check_if_has_face_colors(self) -> bool: # TODO: KLS: "has_colors()" or "has_face_colors()" is more pythonic.
+    # TODO: KLS: "has_colors()" or "has_face_colors()" is more pythonic.
+    def check_if_has_face_colors(
+        self,
+    ) -> bool:
         return self.face_colors is not None
 
     def __eq__(self, other):
