@@ -5,13 +5,22 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "numpy>=2.4.3",
     "pydantic>=2.12.5",
+    "pyquaternion>=0.9.9",
 ]
 
 [dependency-groups]
 dev = [
+    "ipykernel>=7.2.0",
     "pytest>=9.0.2",
+    "scipy>=1.17.1",
+    "trimesh>=4.11.5",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
