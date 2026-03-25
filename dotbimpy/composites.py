@@ -74,6 +74,14 @@ class File(BaseModel):
         default_factory=dict, description="File-level metadata"
     )
 
+    def __init__(self, schema_version="1.0.0", meshes=None, elements=None, info=None):
+        super().__init__(
+            schema_version=schema_version,
+            meshes=meshes if meshes is not None else [],
+            elements=elements if elements is not None else [],
+            info=info if info is not None else {},
+        )
+
     def __eq__(self, other):
         if not isinstance(other, File):
             return False
