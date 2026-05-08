@@ -259,23 +259,23 @@ There is a wonderful library called trimesh: https://github.com/mikedh/trimesh, 
 - convertion of .bim files to single separate .html file with the 3d model: https://trimsh.org/trimesh.viewer.html#trimesh.viewer.scene_to_html
 ![2022-04-13_19h35_29](https://user-images.githubusercontent.com/47977819/163238086-a866206b-3a76-4be9-b0d0-3930a380fd52.png)
 
-Example notebook: https://github.com/paireks/dotbimpy/blob/master/dotbimpy/other/DotbimToTrimeshScene.ipynb
+Example notebook: [DotbimToTrimeshScene.ipynb](notebooks/DotbimToTrimeshScene.ipynb)
 
 ### dotbimpy + cadquery
 
 Sometimes it's much easier to create B-REP and then convert it into mesh. For this purpose you can try cadquery: https://github.com/CadQuery/cadquery
 
-Example notebook 1: https://github.com/paireks/dotbimpy/blob/master/dotbimpy/other/WallsWithBeams.ipynb
+Example notebook 1: [WallsWithBeams.ipynb](notebooks/WallsWithBeams.ipynb)
 
 ![2022-03-14_00h07_13](https://user-images.githubusercontent.com/47977819/158083248-5d2fb3c8-bf0f-439f-ae74-95035bc5cbff.png)
 
-Example notebook 2: https://github.com/paireks/dotbimpy/blob/master/dotbimpy/other/Truss.ipynb
+Example notebook 2: [Truss.ipynb](notebooks/Truss.ipynb)
 
 ![2022-03-20_13h18_47](https://user-images.githubusercontent.com/47977819/159161776-a752df76-cd83-4bef-9404-8961f1043003.png)
 
 ## Libraries used
 
-- For json serialization it uses jsonpickle: [Repo](https://github.com/jsonpickle/jsonpickle) [License](https://github.com/jsonpickle/jsonpickle/blob/main/LICENSE)
-- For math is uses numpy: [Repo](https://github.com/numpy/numpy) [License](https://github.com/numpy/numpy/blob/main/LICENSE.txt)
+- For validation and serialization it uses pydantic: [Repo](https://github.com/pydantic/pydantic) [License](https://github.com/pydantic/pydantic/blob/main/LICENSE)
+- For math it uses numpy: [Repo](https://github.com/numpy/numpy) [License](https://github.com/numpy/numpy/blob/main/LICENSE.txt)
 - For quaternions it uses pyquaternion: [Repo](https://github.com/KieranWynn/pyquaternion) [License](https://github.com/KieranWynn/pyquaternion/blob/master/LICENSE.txt)
 - For plotting it uses plotly: [Repo](https://github.com/plotly/plotly.py) [License](https://github.com/plotly/plotly.py/blob/master/LICENSE.txt)
