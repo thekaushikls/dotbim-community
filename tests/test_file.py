@@ -564,7 +564,7 @@ def test_create_plotly_figure():
     bim_file = File.read(
         os.path.join(
             os.path.dirname(os.path.realpath(__file__)),
-            "test_files\\MultipleMeshes.bim",
+            "test_files", "MultipleMeshes.bim",
         )
     )
     figure = bim_file.create_plotly_figure()
@@ -573,7 +573,7 @@ def test_create_plotly_figure():
     with open(
         os.path.join(
             os.path.dirname(os.path.realpath(__file__)),
-            "text_files\\plotly_multiple_meshes.txt",
+            "text_files", "plotly_multiple_meshes.txt",
         )
     ) as f:
         expected = f.read()
