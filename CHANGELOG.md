@@ -1,8 +1,14 @@
 # Changelog
 
-## [Unreleased]
+> This changelog covers `dotbim-community`, a maintained fork of
+> [dotbimpy](https://github.com/paireks/dotbimpy) by Wojciech Radaczyński.
+
+## [1.0.0] — 2026-05-08
 
 ### Breaking Changes
+
+- **Published as `dotbim-community` on PyPI.** Install with `pip install dotbim-community`.
+  The import name remains `dotbimpy`.
 
 - **All classes are now Pydantic `BaseModel` subclasses.** `Color`, `Vector`, `Rotation`, `Mesh`,
   `Element`, and `File` no longer use plain `__init__`. Constructors now enforce type validation

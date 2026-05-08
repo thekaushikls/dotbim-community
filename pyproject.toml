@@ -1,9 +1,17 @@
 [project]
-name = "dotbimpy"
-version = "0.1.0"
-description = "Add your description here"
+name = "dotbim-community"
+version = "1.0.0"
+description = "A Pydantic-based fork of the official dotbim python package."
 readme = "README.md"
 requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    { name = "Wojciech Radaczyński", email = "47977819+paireks@users.noreply.github.com" },
+    { name = "Kaushik LS", email = "50703773+thekaushikls@users.noreply.github.com" },
+]
+maintainers = [
+    { name = "Kaushik LS", email = "50703773+thekaushikls@users.noreply.github.com" },
+]
 dependencies = [
     "numpy>=2.4.3",
     "pydantic>=2.12.5",

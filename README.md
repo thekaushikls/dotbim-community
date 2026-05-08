@@ -1,4 +1,6 @@
-# dotbimpy (Version 0.1.0)
+# dotbimpy
+
+> This is a maintained fork of [dotbimpy](https://github.com/paireks/dotbimpy) by [Wojciech Radaczyński](https://github.com/paireks), originally released under the MIT license. A PR has been raised to the original repository. If the original maintainer wishes to merge changes back, I'm happy to coordinate.
 
 ## Description
 
@@ -15,7 +17,7 @@ Here you can find small manual for developers regarding development of tools tha
 ### Python
 
 ```cmd
-pip install dotbimpy
+pip install dotbim-community
 ```
 
 ### JupyterLab / Jupyter Notebooks
@@ -29,7 +31,7 @@ To display models inside notebooks additional steps are required, as displaying 
 To use it in Google colab add this line at the beggining of the notebook:
 
 ```cmd
-!pip install dotbimpy
+!pip install dotbim-community
 ```
 
 ## Examples
