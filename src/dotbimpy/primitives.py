@@ -8,7 +8,7 @@ class Vector(BaseModel):
     y: float = Field(0.0, description="Y component of the vector")
     z: float = Field(0.0, description="Z component of the vector")
 
-    def __init__(self, x: float=0.0, y: float=0.0, z: float=0.0):
+    def __init__(self, x: float = 0.0, y: float = 0.0, z: float = 0.0):
         super().__init__(x=x, y=y, z=z)
 
     def __eq__(self, other: object):
@@ -23,14 +23,14 @@ class Rotation(BaseModel):
     qz: float = Field(0.0, description="Z component of the quaternion")
     qw: float = Field(1.0, description="W component (scalar part) of the quaternion")
 
-    def __init__(self, qx: float=0.0, qy: float=0.0, qz: float=0.0, qw: float=1.0):
+    def __init__(
+        self, qx: float = 0.0, qy: float = 0.0, qz: float = 0.0, qw: float = 1.0
+    ):
         super().__init__(qx=qx, qy=qy, qz=qz, qw=qw)
 
     @model_validator(mode="after")
     def validate_unit_quaternion(self) -> "Rotation":
-        magnitude = math.sqrt(
-            self.qx ** 2 + self.qy ** 2 + self.qz ** 2 + self.qw ** 2
-        )
+        magnitude = math.sqrt(self.qx**2 + self.qy**2 + self.qz**2 + self.qw**2)
         if not math.isclose(magnitude, 1.0, abs_tol=1e-6):
             raise ValueError(
                 f"Quaternion must be unit length, got magnitude {magnitude}"
@@ -54,7 +54,7 @@ class Color(BaseModel):
     b: int = Field(0, ge=0, le=255, description="Blue channel")
     a: int = Field(0, ge=0, le=255, description="Alpha (opacity) channel")
 
-    def __init__(self, r: int=0, g: int=0, b: int=0, a: int=0):
+    def __init__(self, r: int = 0, g: int = 0, b: int = 0, a: int = 0):
         super().__init__(r=r, g=g, b=b, a=a)
 
     def __eq__(self, other: object):
@@ -79,7 +79,12 @@ class Mesh(BaseModel):
         description="Flat list of triangle vertex indices [i1, j1, k1, i2, j2, k2, ...]",
     )
 
-    def __init__(self, mesh_id: int=0, coordinates: list[float]|None=None, indices: list[int]|None=None):
+    def __init__(
+        self,
+        mesh_id: int = 0,
+        coordinates: list[float] | None = None,
+        indices: list[int] | None = None,
+    ):
         super().__init__(
             mesh_id=mesh_id,
             coordinates=coordinates if coordinates is not None else [],
@@ -102,9 +107,7 @@ class Mesh(BaseModel):
         if self.indices and num_vertices > 0:
             min_index = min(self.indices)
             if min_index < 0:
-                raise ValueError(
-                    f"Negative index {min_index} is not allowed"
-                )
+                raise ValueError(f"Negative index {min_index} is not allowed")
             max_index = max(self.indices)
             if max_index >= num_vertices:
                 raise ValueError(
