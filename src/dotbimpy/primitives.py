@@ -87,6 +87,11 @@ class Mesh(BaseModel):
         if self.indices and num_vertices == 0:
             raise ValueError("Indices reference vertices but coordinates list is empty")
         if self.indices and num_vertices > 0:
+            min_index = min(self.indices)
+            if min_index < 0:
+                raise ValueError(
+                    f"Negative index {min_index} is not allowed"
+                )
             max_index = max(self.indices)
             if max_index >= num_vertices:
                 raise ValueError(
