@@ -1,5 +1,4 @@
 import json
-from typing import Dict, List, Optional
 from uuid import UUID
 
 from pydantic import BaseModel, Field
@@ -20,10 +19,10 @@ class Element(BaseModel):
     )
     # TODO: KLS: "type" is keyword, maybe use "kind" instead?
     type: str = Field("", description="Element type (e.g. 'Beam', 'Column')")
-    info: Dict[str, str] = Field(
+    info: dict[str, str] = Field(
         default_factory=dict, description="Element level metadata"
     )
-    face_colors: Optional[List[int]] = Field(
+    face_colors: list[int] | None = Field(
         None,
         description="Per-face RGBA colors as flat list [r1,g1,b1,a1, r2,g2,b2,a2, ...]",
     )
@@ -34,7 +33,7 @@ class Element(BaseModel):
     ) -> bool:
         return self.face_colors is not None
 
-    def __eq__(self, other):
+    def __eq__(self, other: object):
         if not isinstance(other, Element):
             return False
         return (
@@ -48,7 +47,7 @@ class Element(BaseModel):
             and self.face_colors == other.face_colors
         )
 
-    def equals_without_mesh_id(self, other):
+    def equals_without_mesh_id(self, other: object):
         if not isinstance(other, Element):
             return False
         return (
@@ -64,17 +63,23 @@ class Element(BaseModel):
 
 class File(BaseModel):
     schema_version: str = Field("1.0.0", description="dotbim schema version")
-    meshes: List[Mesh] = Field(
-        default_factory=list, description="List of meshes in the file"
+    meshes: list[Mesh] = Field(
+        default_factory=list[Mesh], description="List of meshes in the file"
     )
-    elements: List[Element] = Field(
-        default_factory=list, description="List of elements referencing meshes"
+    elements: list[Element] = Field(
+        default_factory=list[Element], description="List of elements referencing meshes"
     )
-    info: Dict[str, str] = Field(
-        default_factory=dict, description="File-level metadata"
+    info: dict[str, str] = Field(
+        default_factory=dict[str, str], description="File-level metadata"
     )
 
-    def __init__(self, schema_version="1.0.0", meshes=None, elements=None, info=None):
+    def __init__(
+        self,
+        schema_version: str = "1.0.0",
+        meshes: list[Mesh] | None = None,
+        elements: list[Element] | None = None,
+        info: dict[str, str] | None = None,
+    ):
         super().__init__(
             schema_version=schema_version,
             meshes=meshes if meshes is not None else [],
@@ -82,7 +87,7 @@ class File(BaseModel):
             info=info if info is not None else {},
         )
 
-    def __eq__(self, other):
+    def __eq__(self, other: object):
         if not isinstance(other, File):
             return False
         return (
@@ -92,7 +97,7 @@ class File(BaseModel):
             and self.info == other.info
         )
 
-    def __add__(self, other):
+    def __add__(self, other: object):
         if not isinstance(other, File):
             return NotImplemented
 

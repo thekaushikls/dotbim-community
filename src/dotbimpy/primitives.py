@@ -6,10 +6,10 @@ class Vector(BaseModel):
     y: float = Field(0.0, description="Y component of the vector")
     z: float = Field(0.0, description="Z component of the vector")
 
-    def __init__(self, x=0.0, y=0.0, z=0.0):
+    def __init__(self, x: float = 0.0, y: float = 0.0, z: float = 0.0):
         super().__init__(x=x, y=y, z=z)
 
-    def __eq__(self, other):
+    def __eq__(self, other: object):
         if isinstance(other, Vector):
             return self.x == other.x and self.y == other.y and self.z == other.z
         return False
@@ -19,12 +19,14 @@ class Rotation(BaseModel):
     qx: float = Field(0.0, description="X component of the quaternion")
     qy: float = Field(0.0, description="Y component of the quaternion")
     qz: float = Field(0.0, description="Z component of the quaternion")
-    qw: float = Field(0.0, description="W component (scalar part) of the quaternion")
+    qw: float = Field(1.0, description="W component (scalar part) of the quaternion")
 
-    def __init__(self, qx=0.0, qy=0.0, qz=0.0, qw=0.0):
+    def __init__(
+        self, qx: float = 0.0, qy: float = 0.0, qz: float = 0.0, qw: float = 0.0
+    ):
         super().__init__(qx=qx, qy=qy, qz=qz, qw=qw)
 
-    def __eq__(self, other):
+    def __eq__(self, other: object):
         if isinstance(other, Rotation):
             return (
                 self.qx == other.qx
@@ -41,10 +43,10 @@ class Color(BaseModel):
     b: int = Field(0, ge=0, le=255, description="Blue channel")
     a: int = Field(0, ge=0, le=255, description="Alpha (opacity) channel")
 
-    def __init__(self, r=0, g=0, b=0, a=0):
+    def __init__(self, r: int = 0, g: int = 0, b: int = 0, a: int = 0):
         super().__init__(r=r, g=g, b=b, a=a)
 
-    def __eq__(self, other):
+    def __eq__(self, other: object):
         if isinstance(other, Color):
             return (
                 self.r == other.r
@@ -58,15 +60,20 @@ class Color(BaseModel):
 class Mesh(BaseModel):
     mesh_id: int = Field(0, ge=0, description="Unique identifier for the mesh")
     coordinates: list[float] = Field(
-        default_factory=list,
+        default_factory=list[float],
         description="Flat list of vertex coordinates [x1, y1, z1, x2, y2, z2, ...]",
     )
     indices: list[int] = Field(
-        default_factory=list,
+        default_factory=list[int],
         description="Flat list of triangle vertex indices [i1, j1, k1, i2, j2, k2, ...]",
     )
 
-    def __init__(self, mesh_id=0, coordinates=None, indices=None):
+    def __init__(
+        self,
+        mesh_id: int = 0,
+        coordinates: list[float] | None = None,
+        indices: list[int] | None = None,
+    ):
         super().__init__(
             mesh_id=mesh_id,
             coordinates=coordinates if coordinates is not None else [],
@@ -89,9 +96,7 @@ class Mesh(BaseModel):
         if self.indices and num_vertices > 0:
             min_index = min(self.indices)
             if min_index < 0:
-                raise ValueError(
-                    f"Negative index {min_index} is not allowed"
-                )
+                raise ValueError(f"Negative index {min_index} is not allowed")
             max_index = max(self.indices)
             if max_index >= num_vertices:
                 raise ValueError(
@@ -103,7 +108,7 @@ class Mesh(BaseModel):
         """Re-run all validators on current data. Raises ValueError if invalid."""
         return self.model_validate(self.model_dump())
 
-    def __eq__(self, other):
+    def __eq__(self, other: object):
         if isinstance(other, Mesh):
             return (
                 self.mesh_id == other.mesh_id
@@ -112,7 +117,7 @@ class Mesh(BaseModel):
             )
         return False
 
-    def equals_without_mesh_id(self, other):
+    def equals_without_mesh_id(self, other: object):
         if isinstance(other, Mesh):
             return (
                 self.coordinates == other.coordinates and self.indices == other.indices
