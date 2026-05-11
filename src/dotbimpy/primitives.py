@@ -23,7 +23,7 @@ class Rotation(BaseModel):
     qz: float = Field(0.0, description="Z component of the quaternion")
     qw: float = Field(1.0, description="W component (scalar part) of the quaternion")
 
-    def __init__(self, qx: float=0.0, qy:float=0.0, qz:float=0.0, qw:float=0.0):
+    def __init__(self, qx: float=0.0, qy: float=0.0, qz: float=0.0, qw: float=1.0):
         super().__init__(qx=qx, qy=qy, qz=qz, qw=qw)
 
     @model_validator(mode="after")
